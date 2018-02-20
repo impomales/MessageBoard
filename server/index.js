@@ -17,6 +17,7 @@ app.get('/', function(req, res) {
     });
 });
 
+app.use('/api/users/:id/messages', messagesRoutes);
 app.use('/api/auth', authRoutes);
 
 const PORT = 8081;
