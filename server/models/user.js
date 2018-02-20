@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var userSchema = new mongoose.Schema({
     email: {
@@ -25,9 +25,10 @@ var userSchema = new mongoose.Schema({
     }]
 });
 
+// run this code 'pre' or before saving user to mongo.
 userSchema.pre('save', function(next) {
     var user = this;
-    
+    // if password modified, then hash it.
     if (!user.isModified('password')) return next();
     bcrypt.hash(user.password, 10)
         .then(function(hashedPassword) {

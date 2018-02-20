@@ -4,8 +4,7 @@ mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/messageBoard', {
     keepAlive: true,
-    reconnectTries: Number.MAX_VALUE,
-    useMongoClient: true
+    reconnectTries: Number.MAX_VALUE
 });
 
 module.exports.User = require('./user');
