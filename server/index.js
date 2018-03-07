@@ -5,6 +5,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var authRoutes = require('./routes/auth');
 var messagesRoutes = require('./routes/messages');
+var auth = require('./middleware/auth');
 var db = require('./models');
 
 app.use(cors());
@@ -17,7 +18,10 @@ app.get('/', function(req, res) {
     });
 });
 
-app.use('/api/users/:id/messages', messagesRoutes);
+app.use('/api/users/:id/messages',
+        auth.loginRequired, 
+        auth.ensureCorrectUser,
+        messagesRoutes);
 app.use('/api/auth', authRoutes);
 
 const PORT = 8081;
