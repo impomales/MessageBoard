@@ -22,7 +22,21 @@ app.use('/api/users/:id/messages',
         auth.loginRequired, 
         auth.ensureCorrectUser,
         messagesRoutes);
+        
 app.use('/api/auth', authRoutes);
+
+app.get('/api/messages', function(req, res) {
+    db.Message
+        .find()
+        .sort({ createAt: 'desc' })
+        .populate('userId', { username: true, profileImageUrl: true })
+        .then(function(messages) {
+            res.json(messages);
+        })
+        .catch(function(err) {
+            res.status(500).json(err);
+        });
+});
 
 const PORT = 8081;
 
