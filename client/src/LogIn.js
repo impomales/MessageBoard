@@ -22,8 +22,9 @@ class LogIn extends Component {
         this.setState({password: e.target.value}); 
     }
     
-    handleSubmit() {
-        this.props.logIn(this.state);
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.handleLogIn(this.state);
     }
     
     render() {

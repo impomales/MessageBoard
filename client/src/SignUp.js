@@ -15,6 +15,7 @@ class SignUp extends Component {
         this.handleUsernameInput = this.handleUsernameInput.bind(this);
         this.handlePasswordInput = this.handlePasswordInput.bind(this);
         this.handleImageUrlInput = this.handleImageUrlInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     handleEmailInput(e) {
@@ -33,9 +34,14 @@ class SignUp extends Component {
         this.setState({imageUrl: e.target.value});
     }
     
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.handleSignUp(this.state);
+    }
+    
     render() {
         return (
-            <form className="sign-up-form">
+            <form className="sign-up-form" onSubmit={this.handleSubmit}>
                 <label>E-mail</label>
                 <input 
                     type="text" 

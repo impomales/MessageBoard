@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
 import Form from './Form';
+import * as apiCalls from './api';
 import './App.css';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
     this.setSignUp = this.setSignUp.bind(this);
     this.setLogIn = this.setLogIn.bind(this);
     this.logIn = this.logIn.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
   
   setSignUp() {
@@ -26,6 +28,11 @@ class App extends Component {
     
   }
   
+  async signUp(data) {
+    let res = await apiCalls.signUp(data);
+    console.log(res);
+  }
+  
   render() {
     let signUpTab = this.state.signUpTab;
     
@@ -34,7 +41,7 @@ class App extends Component {
         <NavBar 
           signUpOption={this.setSignUp}
           logInOption={this.setLogIn} />
-        <Form signUpTab={signUpTab} logIn={this.logIn}/>
+        <Form signUpTab={signUpTab} logIn={this.logIn} signUp={this.signUp}/>
       </div>
     );
   }
